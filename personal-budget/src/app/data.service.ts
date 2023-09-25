@@ -6,25 +6,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private baseUrl = 'http://localhost:3000'; // Replace with your actual server URL
-  private mlFrameworks: any[] = []; // Store fetched data
-
-  private dataSubject: BehaviorSubject<any[]> = new BehaviorSubject(this.mlFrameworks);
-  public data$: Observable<any[]> = this.dataSubject.asObservable();
+  private data: any[]=[];
 
   constructor(private http: HttpClient) {}
 
-  // Method to fetch ML frameworks from the backend
-  getMLFrameworks(): void {
-    if (this.mlFrameworks.length === 0) {
-      this.fetchDataFromBackend().subscribe(data => {
-        this.mlFrameworks = data;
-        this.dataSubject.next(this.mlFrameworks);
-      });
-    }
+  // Function to fetch data from the backend
+  fetchData(): Observable<any[]> {
+    // Adjust the URL to your backend API endpoint
+    const baseUrl = 'http://localhost:3000/budget';
+
+    return this.http.get<any[]>(baseUrl);
   }
 
-  private fetchDataFromBackend(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/mlFrameworks`);
+  // Function to set the data property
+  setData(newData: any): void {
+    this.data = newData;
+  }
+
+  // Function to get the data
+  getData(): any {
+    return this.data;
   }
 }

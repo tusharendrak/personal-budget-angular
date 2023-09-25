@@ -15,6 +15,7 @@ import { P404Component } from './p404/p404.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ContactComponent } from './contact/contact.component';
 import { D3ChartComponent } from './d3-chart/d3-chart.component';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { D3ChartComponent } from './d3-chart/d3-chart.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
